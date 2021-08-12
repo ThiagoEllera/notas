@@ -1,0 +1,54 @@
+<div id="data-grid-demo">
+  <dx-data-grid
+    id="gridContainer"
+    [dataSource]="dataSource"
+    [showBorders]="true">
+
+    <dxo-paging [enabled]="false"></dxo-paging>
+    <dxo-editing
+      mode="popup"
+      [allowUpdating]="true"
+      [allowAdding]="true"
+      [allowDeleting]="true"
+      [useIcons]="true">
+
+      <dxo-popup
+        title="Itens da Nota"
+        [dragEnabled]="true"
+        [showTitle]="true"
+        [width]="700"
+        [height]="525">
+      </dxo-popup>
+
+
+      <dxo-form>
+        <dxi-item itemType="group" [colCount]="2" [colSpan]="2">
+          <dxi-item dataField="numero"></dxi-item>
+          <dxi-item dataField="quantidade"></dxi-item>
+          <dxi-item dataField="numeroNota"></dxi-item>
+          <dxi-item dataField="nomeProduto"></dxi-item>
+        </dxi-item>
+      </dxo-form>
+
+    </dxo-editing>
+
+    <dxi-column dataField="numero"></dxi-column>
+    <dxi-column dataField="quantidade"></dxi-column>
+    <dxi-column dataField="numeroNota">
+      <dxo-lookup
+        [dataSource]="notas"
+        displayExpr="numero"
+        valueExpr="numero">
+      </dxo-lookup>
+    </dxi-column>
+    <dxi-column dataField="nomeProduto">
+      <dxo-lookup
+        [dataSource]="produtos"
+        displayExpr="descricao"
+        valueExpr="descricao">
+      </dxo-lookup>
+
+    </dxi-column>
+
+  </dx-data-grid>
+</div>

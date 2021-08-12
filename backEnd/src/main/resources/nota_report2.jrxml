@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.17.0-6d93193241dd8cc42629e188b94f9e0bc5722efd  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="nota_report2" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20"
+              topMargin="20" bottomMargin="20" uuid="3aec9e53-bb25-4bc4-903d-b6df7fdeded3">
+    <queryString>
+        <![CDATA[]]>
+    </queryString>
+    <field name="id" class="java.lang.Integer"/>
+    <field name="dataCompra" class="java.util.Date"/>
+    <field name="numero" class="java.lang.Integer"/>
+    <field name="nomeCliente" class="java.lang.String"/>
+    <background>
+        <band/>
+    </background>
+    <title>
+        <band height="72">
+            <frame>
+                <reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699"
+                               uuid="deb9851b-a8f1-48f9-bf5e-b7bb36e08aa7"/>
+                <staticText>
+                    <reportElement x="20" y="20" width="234" height="43" forecolor="#FFFFFF"
+                                   uuid="6fab0577-0b58-4c2b-8173-126109590b03"/>
+                    <textElement>
+                        <font size="34" isBold="true"/>
+                    </textElement>
+                    <text><![CDATA[Notas]]></text>
+                </staticText>
+                <staticText>
+                    <reportElement x="395" y="43" width="180" height="20" forecolor="#FFFFFF"
+                                   uuid="5e5586ed-574f-474e-8e9f-024e7fb9ee4c"/>
+                    <textElement textAlignment="Right">
+                        <font size="14" isBold="false"/>
+                    </textElement>
+                    <text><![CDATA[Notas fiscais]]></text>
+                </staticText>
+            </frame>
+        </band>
+    </title>
+    <pageHeader>
+        <band height="13"/>
+    </pageHeader>
+    <columnHeader>
+        <band height="21">
+            <line>
+                <reportElement x="-20" y="20" width="595" height="1" forecolor="#666666"
+                               uuid="087080ef-9c8b-42fd-857c-bbdf26bb1a9c"/>
+            </line>
+            <staticText>
+                <reportElement x="0" y="0" width="141" height="21" uuid="fed2a9e9-4ffc-4cb1-8364-04e253db511b">
+                    <property name="com.jaspersoft.studio.spreadsheet.connectionID"
+                              value="7d590f8c-41e4-4754-b884-de4960b186d3"/>
+                </reportElement>
+                <text><![CDATA[Id]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="141" y="0" width="138" height="21" uuid="c53ccf15-bea8-4bba-ab48-0806f0a768b8">
+                    <property name="com.jaspersoft.studio.spreadsheet.connectionID"
+                              value="12717bbd-a00f-45ec-9b24-9db656aadf5e"/>
+                </reportElement>
+                <text><![CDATA[Data da Compra]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="279" y="0" width="138" height="21" uuid="165466af-fcf3-485d-aeac-e6a748e5c47e">
+                    <property name="com.jaspersoft.studio.spreadsheet.connectionID"
+                              value="4b6d208c-4558-4a4e-9e8a-8cc8d336b590"/>
+                </reportElement>
+                <text><![CDATA[Numero]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="417" y="0" width="138" height="21" uuid="c5e7c027-f7f9-40d5-83b2-40c22660a0c8">
+                    <property name="com.jaspersoft.studio.spreadsheet.connectionID"
+                              value="27eb5380-e6ff-41a0-8de2-880e994b22a5"/>
+                </reportElement>
+                <text><![CDATA[Cliente]]></text>
+            </staticText>
+        </band>
+    </columnHeader>
+    <detail>
+        <band height="34">
+            <line>
+                <reportElement positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1"
+                               uuid="a58f585c-3c0e-49f6-b608-6401c6b7128b"/>
+            </line>
+            <textField>
+                <reportElement x="0" y="4" width="141" height="30" uuid="1a37d206-eef4-4a52-ae6f-835ce92a8918">
+                    <property name="com.jaspersoft.studio.spreadsheet.connectionID"
+                              value="7d590f8c-41e4-4754-b884-de4960b186d3"/>
+                </reportElement>
+                <textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+            </textField>
+            <textField pattern="dd/MM/yyyy">
+                <reportElement x="141" y="4" width="138" height="30" uuid="af297c98-8b0b-40a7-acd3-a4f3c1f3817b">
+                    <property name="com.jaspersoft.studio.spreadsheet.connectionID"
+                              value="12717bbd-a00f-45ec-9b24-9db656aadf5e"/>
+                </reportElement>
+                <textFieldExpression><![CDATA[$F{dataCompra}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="279" y="4" width="138" height="30" uuid="95356bd3-37d2-4f4d-aeab-a5cd3d356841">
+                    <property name="com.jaspersoft.studio.spreadsheet.connectionID"
+                              value="4b6d208c-4558-4a4e-9e8a-8cc8d336b590"/>
+                </reportElement>
+                <textFieldExpression><![CDATA[$F{numero}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="417" y="4" width="138" height="30" uuid="0d2de727-a22e-4764-b33f-d7a5dea25587">
+                    <property name="com.jaspersoft.studio.spreadsheet.connectionID"
+                              value="27eb5380-e6ff-41a0-8de2-880e994b22a5"/>
+                </reportElement>
+                <textFieldExpression><![CDATA[$F{nomeCliente}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+    <columnFooter>
+        <band/>
+    </columnFooter>
+    <pageFooter>
+        <band height="17">
+            <textField>
+                <reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6"
+                               uuid="77eb12f9-2147-4c07-9fd2-ede269087ae8"/>
+                <textElement textAlignment="Right"/>
+                <textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+            </textField>
+            <textField evaluationTime="Report">
+                <reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6"
+                               uuid="fe20b7a1-1c40-4080-8066-ea26730c6d86"/>
+                <textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+            </textField>
+            <textField pattern="EEEEE dd MMMMM yyyy">
+                <reportElement x="0" y="4" width="100" height="13" uuid="ba8b1c9c-290d-41aa-a9c3-faceba29e9e8"/>
+                <textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+            </textField>
+        </band>
+    </pageFooter>
+    <summary>
+        <band/>
+    </summary>
+</jasperReport>
