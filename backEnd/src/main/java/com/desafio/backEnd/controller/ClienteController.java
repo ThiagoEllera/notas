@@ -42,7 +42,7 @@ public class ClienteController {
     @GetMapping("/{id}")
     public ClienteDto detalhar(@PathVariable Integer id) {
 
-        Cliente cliente = clienteRepository.getById(id);
+        Cliente cliente = clienteRepository.findById(id).get();
         return new ClienteDto(cliente);
     }
 

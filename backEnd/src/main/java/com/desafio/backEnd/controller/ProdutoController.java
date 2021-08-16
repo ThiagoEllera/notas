@@ -42,7 +42,7 @@ public class ProdutoController {
     @GetMapping("/{id}")
     public ProdutoDto detalhar(@PathVariable Integer id) {
 
-        Produto produto = produtoRepository.getById(id);
+        Produto produto = produtoRepository.findById(id).get();
         return new ProdutoDto(produto);
     }
 

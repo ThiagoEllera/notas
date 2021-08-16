@@ -1,15 +1,12 @@
 package com.desafio.backEnd.controller.dto;
 
 import com.desafio.backEnd.modelo.Nota;
-import com.desafio.backEnd.repository.ClienteRepository;
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class NotaDto {

@@ -48,7 +48,7 @@ public class AtulizacaoNotaItemForm {
     }
 
     public NotaItem atualizar(Integer id, NotaItemRepository notaItemRepository, ProdutoRepository produtoRepository, NotaRepository notaRepository) {
-        NotaItem notaItem = notaItemRepository.getById(id);
+        NotaItem notaItem = notaItemRepository.findById(id).get();
 
 
         notaItem.setNumero((this.numero != null) ? this.numero : notaItem.getNumero());

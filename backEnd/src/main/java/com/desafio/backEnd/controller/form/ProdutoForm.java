@@ -35,7 +35,7 @@ public class ProdutoForm {
     }
 
     public Produto atualizar(Integer id, ProdutoRepository produtoRepository) {
-        Produto produto = produtoRepository.getById(id);
+        Produto produto = produtoRepository.findById(id).get();
 
         produto.setCodigo((this.codigo != null) ? this.codigo : produto.getCodigo());
         produto.setDescricao((this.descricao != null) ? this.descricao : produto.getDescricao());

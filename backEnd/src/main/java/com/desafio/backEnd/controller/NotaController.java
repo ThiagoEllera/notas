@@ -54,7 +54,7 @@ public class NotaController {
     @GetMapping("/{id}")
     public DetalhesNotaDto detalhar(@PathVariable Integer id) {
 
-        Nota nota = notaRepository.getById(id);
+        Nota nota = notaRepository.findByNumero(id);
         return new DetalhesNotaDto(nota);
     }
 

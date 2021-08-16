@@ -3,7 +3,6 @@ package com.desafio.backEnd.controller.form;
 import com.desafio.backEnd.modelo.Nota;
 import com.desafio.backEnd.repository.ClienteRepository;
 import com.desafio.backEnd.repository.NotaRepository;
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -35,7 +34,7 @@ public class AtulizacaoNotaForm {
     }
 
     public Nota atualizar(Integer id, NotaRepository notaRepository, ClienteRepository clienteRepository) {
-        Nota nota = notaRepository.getById(id);
+        Nota nota = notaRepository.findByNumero(id);
 
         nota.setNumero((this.numero != null) ? this.numero : nota.getNumero());
         nota.setDataCompra((this.dataCompra != null) ? this.dataCompra : nota.getDataCompra());

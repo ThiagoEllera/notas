@@ -51,7 +51,7 @@ public class NotaItemController {
     @GetMapping("/{id}")
     public NotaItemDto detalhar(@PathVariable Integer id) {
 
-        NotaItem notaItem = notaItemRepository.getById(id);
+        NotaItem notaItem = notaItemRepository.findById(id).get();
         return new NotaItemDto(notaItem);
     }
 
