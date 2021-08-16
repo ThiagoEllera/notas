@@ -7,6 +7,7 @@ import com.desafio.backEnd.controller.form.NotaForm;
 import com.desafio.backEnd.modelo.Nota;
 import com.desafio.backEnd.repository.ClienteRepository;
 import com.desafio.backEnd.repository.NotaRepository;
+import com.desafio.backEnd.service.NotaService;
 import net.sf.jasperreports.engine.JRException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,10 +20,18 @@ import java.io.FileNotFoundException;
 import java.net.URI;
 import java.util.List;
 
+import static org.springframework.http.HttpStatus.CREATED;
+
 @CrossOrigin
 @RestController
 @RequestMapping(value = "/nota")
 public class NotaController {
+
+    private NotaService service;
+
+    public NotaController(NotaService service) {
+        this.service = service;
+    }
 
     @Autowired
     private NotaRepository notaRepository;
@@ -38,18 +47,26 @@ public class NotaController {
         return lista;
     }
 
-
     @PostMapping
-    @Transactional
-    public ResponseEntity<NotaDto> cadastrar(@RequestBody @Valid NotaForm form, UriComponentsBuilder uriBuilder) {
+    @ResponseStatus(CREATED)
+    public NotaDto save(@RequestBody NotaDto dto, UriComponentsBuilder uriBuilder){
+        Nota nota = service.salvar(dto);
 
-        Nota nota = form.converter(clienteRepository);
-        notaRepository.save(nota);
-
-        URI uri = uriBuilder.path("/nota{id}").buildAndExpand(nota.getId()).toUri();
-        return ResponseEntity.created(uri).body(new NotaDto(nota));
-
+        return new NotaDto(nota);
     }
+
+
+//    @PostMapping
+//    @Transactional
+//    public ResponseEntity<NotaDto> cadastrar(@RequestBody @Valid NotaForm form, UriComponentsBuilder uriBuilder) {
+//
+//        Nota nota = form.converter(clienteRepository);
+//        notaRepository.save(nota);
+//
+//        URI uri = uriBuilder.path("/nota{id}").buildAndExpand(nota.getId()).toUri();
+//        return ResponseEntity.created(uri).body(new NotaDto(nota));
+//
+//    }
 
     @GetMapping("/{id}")
     public DetalhesNotaDto detalhar(@PathVariable Integer id) {

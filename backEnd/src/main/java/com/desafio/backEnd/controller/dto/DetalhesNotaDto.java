@@ -19,7 +19,7 @@ public class DetalhesNotaDto {
     private Date dataCompra;
     private Integer numero;
     private String nomeCliente;
-    //private List<NotaItemDto> notaItems;
+    private List<NotaItemDto> notaItems;
 
     public DetalhesNotaDto(Nota nota) {
         this.id = nota.getId();
@@ -27,8 +27,8 @@ public class DetalhesNotaDto {
         this.dataCompra = nota.getDataCompra();
         this.numero = nota.getNumero();
 
-       //this.notaItems = new ArrayList<>();
-        //this.notaItems.addAll(nota.getNotaItem().stream().map(NotaItemDto::new).collect(Collectors.toList()));
+       this.notaItems = new ArrayList<>();
+        this.notaItems.addAll(nota.getNotaItem().stream().map(NotaItemDto::new).collect(Collectors.toList()));
 
     }
 
@@ -48,9 +48,9 @@ public class DetalhesNotaDto {
         return nomeCliente;
     }
 
-   // public List<NotaItemDto> getNotaItems() {
-       // return notaItems;
-   // }
+   public List<NotaItemDto> getNotaItems() {
+       return notaItems;
+    }
 
 
 }

@@ -17,10 +17,12 @@ import {ProdutoModule} from "./pages/produto/produto.component";
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
     TesteComponent,
+
 
 
 
