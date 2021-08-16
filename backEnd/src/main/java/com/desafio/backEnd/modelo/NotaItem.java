@@ -23,6 +23,8 @@ public class NotaItem {
     private BigDecimal quantidade;
 
 
+
+
     public NotaItem() {
 
     }
@@ -74,5 +76,14 @@ public class NotaItem {
         this.produto = produto;
     }
 
-
+    @Override
+    public String toString() {
+        return "NotaItem{" +
+                "id=" + id +
+                ", nota=" + nota +
+                ", numero=" + numero +
+                ", produto=" + produto +
+                ", quantidade=" + quantidade +
+                '}';
+    }
 }

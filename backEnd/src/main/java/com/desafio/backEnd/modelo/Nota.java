@@ -21,18 +21,20 @@ public class Nota {
     @ManyToOne
     private Cliente cliente;
 
-    //@OneToMany(mappedBy = "nota", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    //private List<NotaItem> notaItem = new ArrayList<>();
+    @OneToMany(mappedBy = "nota", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<NotaItem> notaItem = new ArrayList<>();
     ;
 
     public Nota() {
 
     }
 
-    public Nota(Integer numero, Date dataCompra, Cliente cliente) {
-        this.numero = numero;
+    public Nota(Integer id, Date dataCompra, Integer numero, Cliente cliente, List<NotaItem> notaItem) {
+        this.id = id;
         this.dataCompra = dataCompra;
+        this.numero = numero;
         this.cliente = cliente;
+        this.notaItem = notaItem;
     }
 
     public Date getDataCompra() {
@@ -65,13 +67,22 @@ public class Nota {
         this.cliente = cliente;
     }
 
-    //public List<NotaItem> getNotaItem() {
-   //     return notaItem;
-  //  }
+    public List<NotaItem> getNotaItem() {
+        return notaItem;
+    }
 
-   // public void setNotaItem(List<NotaItem> notaItem) {
-   //     this.notaItem = notaItem;
-   // }
+    public void setNotaItem(List<NotaItem> notaItem) {
+        this.notaItem = notaItem;
+    }
 
-
+    @Override
+    public String toString() {
+        return "Nota{" +
+                "id=" + id +
+                ", dataCompra=" + dataCompra +
+                ", numero=" + numero +
+                ", cliente=" + cliente +
+                ", notaItem=" + notaItem +
+                '}';
+    }
 }

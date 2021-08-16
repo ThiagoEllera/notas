@@ -3,5 +3,7 @@ export interface Notas{
   "dataCompra": Date,
   "numero": number,
   "nomeCliente": string
+
+
 }
 

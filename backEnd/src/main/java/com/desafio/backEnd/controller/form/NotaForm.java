@@ -1,5 +1,6 @@
 package com.desafio.backEnd.controller.form;
 
+import com.desafio.backEnd.controller.dto.NotaItemDto;
 import com.desafio.backEnd.modelo.Cliente;
 import com.desafio.backEnd.modelo.Nota;
 import com.desafio.backEnd.repository.ClienteRepository;
@@ -11,6 +12,7 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
 
 public class NotaForm {
 
@@ -23,6 +25,10 @@ public class NotaForm {
     @NotNull
     @NotEmpty
     private String nomeCliente;
+
+    private List<NotaItemDto> notaItems;
+
+
 
     public Date getDataCompra() {
         return dataCompra;
@@ -49,9 +55,13 @@ public class NotaForm {
         this.numero = numero;
     }
 
-    public Nota converter(ClienteRepository clienteRepository) {
-        Cliente cliente = clienteRepository.getByNome(nomeCliente);
-        return new Nota(numero, dataCompra, cliente);
+    public List<NotaItemDto> getNotaItems() {
+        return notaItems;
     }
+
+//    public Nota converter(ClienteRepository clienteRepository) {
+//        Cliente cliente = clienteRepository.getByNome(nomeCliente);
+//        return new Nota(numero, dataCompra, cliente,notaItems);
+//    }
 
 }
