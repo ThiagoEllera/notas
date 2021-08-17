@@ -17,6 +17,7 @@ import {ProdutoService} from "../../shared/services/produto.service";
 import {Notas} from "../../shared/interfaces/nota.interface";
 import {NotaService} from "../../shared/services/nota.service";
 import {NotaDetalhesComponent} from "./nota-detalhes/nota-detalhes.component";
+import {NotaItem} from "../../shared/interfaces/notaItem.interface";
 
 
 var URL = "http://localhost:8080/nota";
@@ -27,114 +28,80 @@ var URL2 = "http://localhost:8080/notaItem";
   templateUrl: './nota.component.html',
   styleUrls: ['./nota.component.scss']
 })
-export class NotaComponent implements OnInit,AfterViewInit{
+export class NotaComponent implements OnInit{
 
-  dataSource: any;
-  dataSource2: any;
-  clientes: any;
-  produtos: any;
-  notas: any;
+
+
+  lista: Notas [] = [];
+  nota!: Notas;
 
 
 
   constructor(
-    private http: HttpClient,
-    private clienteService:ClienteService,
-    private produtoService:ProdutoService,
+
     private notaService:NotaService
 
   ) {
-
-    this.dataSource = new CustomStore({
-      key: "id",
-
-      load: () => this.sendRequest(URL),
-      insert: (values) => this.sendRequest(URL , "POST", values),
-      update: (key, values) => this.sendRequest(URL , "PUT", {
-        key,
-        values
-      }),
-      remove: (key) => this.sendRequest(URL, "DELETE", {
-        key
-      })
-    });
-
   }
-
-  sendRequest(url: string, method: string = "GET", data: any = {}): any {
-
-    let result: any;
-
-
-    switch (method) {
-      case "GET":
-        result = this.http.get(url);
-        break;
-      case "PUT":
-        result = this.http.put(`${url}/${data.key}`, data.values);
-        break;
-      case "POST":
-        result = this.http.post(url, data);
-        break;
-      case "DELETE":
-        result = this.http.delete(`${url}/${data.key}`);
-        break;
-    }
-    return result
-      .toPromise()
-      .then((data: any) => {
-        console.log(data);
-        return data;
-      })
-  }
-
-
-
-
-
-
-
-
-
 
   ngOnInit(): void {
-    this.popularClientes();
-    this.popularProdutos();
-    this.popularNotas();
+    this.buscaNotas();
 
 
   }
 
-  ngAfterViewInit() {
-    this.popularClientes();
-    this.popularProdutos();
-    this.popularNotas();
-  }
-  popularClientes(){
-    this.clienteService.lista().subscribe((clientes: Clientes[]) =>{
-      this.clientes = clientes;
-      console.log(clientes);
-    })
-  }
-  popularProdutos(){
-    this.produtoService.lista().subscribe((produtos: Produtos[]) =>{
-      this.produtos = produtos;
-      console.log(produtos);
-    })
+
+  public buscaNotas(): void {
+    this.lista = [];
+    this.notaService.lista()
+      .subscribe((nota: Notas[]) => {
+        this.lista = nota;
+      });
 
   }
 
-  popularNotas(){
-    this.notaService.lista().subscribe((notas: Notas[]) =>{
-      this.notas = notas;
-      console.log(notas);
-    })
+  public buscaNotaId(id: any): void {
+      this.notaService.listarId(id)
+      .subscribe((nota: Notas) => {
+        this.nota = nota;
+        console.log(this.nota);
+      });
+
   }
 
+  public criar(nota: Notas): void {
+    this.notaService.criar(nota)
+      .subscribe(d => this.lista.push(nota));
+    console.log(this.lista);
+  }
 
+  public atualizar(nota: Notas): void {
+    this.notaService.atualizar(nota)
+      .subscribe(n => {
+        this.lista.forEach(item => {
+          if (item.id == n.id) {
+            item = n;
+            return;
+          }
+          console.log(this.lista);
+        })
+      })
+  }
 
-
+  public deletar(id: any): void {
+    this.notaService.deletar(id)
+      .subscribe(() => {
+        this.buscaNotas();
+        console.log(this.lista);
+      });
+  }
 }
+
+
+
+
+
+
 
 
 @NgModule({

@@ -5,8 +5,7 @@
 <div id="data-grid-demo">
   <dx-data-grid
     id="gridContainer"
-    [dataSource]="dataSource"
-    keyExpr="id"
+    [dataSource]="lista"
     [showBorders]="true">
 
     <dxo-paging [enabled]="false"></dxo-paging>
@@ -26,25 +25,44 @@
         [position]="{ my: 'top', at: 'top'}">
       </dxo-popup>
 
+      <dxo-form>
+          <dxi-item editorType="dxDateBox" dataField="dataCompra" dataType="date"></dxi-item>
+          <dxi-item dataField="nomeCliente"></dxi-item>
+          <dxi-item dataField="numero"></dxi-item>
+          <dxi-item itemType="empty"></dxi-item>
+          <dxi-item dataField="notaItems" [colSpan]="2"></dxi-item>
+      </dxo-form>
+
     </dxo-editing>
 
 
 
       <dxi-column dataField="dataCompra" dataType="date" format="dd/MM/yyyy"></dxi-column>
-      <dxi-column dataField="nomeCliente">
-        <dxo-lookup
-          [dataSource]="clientes"
-          displayExpr="nome"
-          valueExpr="nome">
-        </dxo-lookup>
-      </dxi-column>
+      <dxi-column dataField="nomeCliente"></dxi-column>
       <dxi-column dataField="numero"></dxi-column>
-      <dxi-column dataField="notaItems" [visible]="true"  editCellTemplate="gridEditTemplate"></dxi-column>
+      <dxi-column dataField="notaItems" [visible]="false"  editCellTemplate="gridEditTemplate"></dxi-column>
 
-    <div *dxTemplate="let data of 'gridEditTemplate'">
-      <dx-data-grid [dataSource]="data">
+    <div *dxTemplate="let notaItems of 'gridEditTemplate'">
+      <dx-data-grid [dataSource]="notaItems.value" >>
+        <dxo-editing
+          mode="popup"
+          [allowUpdating]="true"
+          [allowAdding]="true"
+          [allowDeleting]="true"
+          [useIcons]="true">
+
+          <dxo-popup
+            title="NotaItens"
+            [dragEnabled]="true"
+            [showTitle]="true"
+            [width]="700"
+            [height]="525"
+            [position]="{ my: 'top', at: 'top'}">
+          </dxo-popup>
+
+        </dxo-editing>
         <dxi-column dataField="numero"></dxi-column>
-        <dxi-column dataField="produto"></dxi-column>
+        <dxi-column dataField="nomeProduto"></dxi-column>
         <dxi-column dataField="quantidade"></dxi-column>
 
       </dx-data-grid>

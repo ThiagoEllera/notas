@@ -11,13 +11,28 @@ import {Notas} from "../interfaces/nota.interface";
   providedIn: 'root'
 })
 export class NotaService {
+  apiUrl = environment.apiUrl;
 
-  private readonly API = 'http://localhost:8080/nota';
+
   constructor(private httpClient: HttpClient) {}
 
   lista(){
-    return this.httpClient.get<Notas[]>(this.API);
+    return this.httpClient.get<Notas[]>(this.apiUrl + 'nota/');
   }
 
+  public listarId(id: string) {
+    return this.httpClient.get<Notas>(`${this.apiUrl} + nota/${id}`);
+  }
+
+  criar(nota : Notas){
+    return this.httpClient.post<Notas>(this.apiUrl + 'nota/', nota);
+  }
+
+  public atualizar(nota : Notas) {
+    return this.httpClient.put<Notas>(this.apiUrl + 'nota/', nota);
+  }
+   public deletar(id: string) {
+     return this.httpClient.delete<Notas>(`${this.apiUrl} + nota/${id}`);
+   }
 
 }

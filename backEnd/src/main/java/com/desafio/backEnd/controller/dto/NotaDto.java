@@ -36,9 +36,9 @@ public class NotaDto {
 
     public NotaDto(Nota nota) {
         this.id = nota.getId();
-        this.nomeCliente = nota.getCliente().getNome();
-        this.dataCompra = nota.getDataCompra();
-        this.numero = nota.getNumero();
+        this.nomeCliente = (this.nomeCliente != null) ? this.nomeCliente : nota.getCliente().getNome();
+        this.dataCompra = (this.dataCompra != null) ? this.dataCompra : nota.getDataCompra();
+        this.numero = (this.numero != null) ? this.numero : nota.getNumero();
         this.notaItems = new ArrayList<>();
         this.notaItems.addAll(nota.getNotaItem().stream().map(NotaItemDto::new).collect(Collectors.toList()));
 
