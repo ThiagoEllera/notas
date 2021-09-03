@@ -1,24 +1,13 @@
-import {AfterViewInit, Component, NgModule, OnInit} from '@angular/core';
-import {HttpClient, HttpClientModule} from "@angular/common/http";
-import CustomStore from "devextreme/data/custom_store";
+import {Component, NgModule, OnInit} from '@angular/core';
+import {HttpClientModule} from "@angular/common/http";
 import {BrowserModule} from "@angular/platform-browser";
-import {
-  DxButtonModule,
-  DxDataGridModule,
-  DxDateBoxModule,
-  DxListModule,
-  DxTemplateHost,
-  DxTemplateModule
-} from "devextreme-angular";
+import {DxButtonModule, DxDataGridModule, DxDateBoxModule, DxListModule, DxTemplateModule} from "devextreme-angular";
 
 import {NotaService} from "../../shared/services/nota.service";
 
 import {Nota} from "../../model/nota";
 import {NotaItem} from "../../model/notaItem";
-
-
-
-
+import {FirstKeysToConsoleModule} from "../../shared/pipe/first.keys.to.console.pipe";
 
 
 @Component({
@@ -26,8 +15,7 @@ import {NotaItem} from "../../model/notaItem";
   templateUrl: './nota.component.html',
   styleUrls: ['./nota.component.scss']
 })
-export class NotaComponent implements OnInit{
-
+export class NotaComponent implements OnInit {
 
 
   lista: Nota [] = [];
@@ -36,13 +24,8 @@ export class NotaComponent implements OnInit{
   listaItens: NotaItem[] = [];
 
 
+  constructor(private notaService: NotaService) {
 
-  constructor(
-
-    private notaService:NotaService
-*/
-
-  ) {
   }
 
   ngOnInit(): void {
@@ -63,24 +46,31 @@ export class NotaComponent implements OnInit{
 
 
   onSaved(event: any) {
+/*
     event.data;
     console.log(event.data);
     this.notaService.salvar(event.data);
+*/
   }
 
-  setaDataItem(value :any) {
-    if(!value){
-      value = new NotaItem();
+  setaDataItem(value: any) {
+    if (!value) {
+      value = new Array<NotaItem>();
     }
     return value;
   }
+
+  onInitNewRowItens(event: any, data: any) {
+    debugger
+  }
+
+  onInitNewRowGrid(event: any) {
+    if (!event.value) {
+      event.value = new Nota();
+      event.value.itens = [];
+    }
+  }
 }
-
-
-
-
-
-
 
 
 @NgModule({
@@ -91,9 +81,11 @@ export class NotaComponent implements OnInit{
     HttpClientModule,
     DxDateBoxModule,
     DxTemplateModule,
-    DxButtonModule
+    DxButtonModule,
+    FirstKeysToConsoleModule
   ],
   declarations: [NotaComponent],
   bootstrap: [NotaComponent]
 })
-export class NotaModule { }
+export class NotaModule {
+}
