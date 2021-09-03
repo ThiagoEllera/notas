@@ -5,9 +5,12 @@
 <div id="data-grid-demo">
   <dx-data-grid
     id="gridContainer"
-    [dataSource]="dataSource"
+    [dataSource]="lista"
     keyExpr="id"
-    [showBorders]="true">
+    [showBorders]="true"
+    (onSaved)="onSaved($event)"
+
+    >
 
     <dxo-paging [enabled]="false"></dxo-paging>
     <dxo-editing
@@ -23,15 +26,15 @@
         [showTitle]="true">
       </dxo-popup>
 
-      <dxo-form colCount="2">
-        <dxi-item dataField="dataCompra" dataType="date" format="dd/MM/yyyy"></dxi-item>
-        <dxi-item dataField="nomeCliente">
-          <dxo-lookup
-            [dataSource]="clientes"
-            displayExpr="nome"
-            valueExpr="nome">
-          </dxo-lookup>
-        </dxi-item>
+      <dxo-form>
+          <dxi-item editorType="dxDateBox" dataField="dataCompra" dataType="date"></dxi-item>
+          <dxi-item dataField="nomeCliente"></dxi-item>
+          <dxi-item dataField="numero"></dxi-item>
+          <dxi-item itemType="empty"></dxi-item>
+          <dxi-item dataField="notaItems" [colSpan]="2"></dxi-item>
+      </dxo-form>
+
+      <dxi-column dataField="nomeCliente"></dxi-column>
         <dxi-item dataField="numero"></dxi-item>
         <dxi-item itemType="empty"></dxi-item>
         <dxi-item dataField="notaItems" [visible]="true"  editCellTemplate="gridEditTemplate" colSpan="2"></dxi-item>
@@ -44,11 +47,10 @@
       <dxi-column dataField="dataCompra" dataType="date" format="dd/MM/yyyy"></dxi-column>
       <dxi-column dataField="nomeCliente"></dxi-column>
       <dxi-column dataField="numero"></dxi-column>
-      <dxi-column dataField="notaItems" [visible]="true"  editCellTemplate="gridEditTemplate"></dxi-column>
+      <dxi-column dataField="notaItems" [visible]="false"  editCellTemplate="gridEditTemplate"></dxi-column>
 
     <div *dxTemplate="let data of 'gridEditTemplate'">
-      <dx-data-grid [dataSource]="data.value">
-
+      <dx-data-grid [dataSource]="setaDataItem(data.value)" >
         <dxo-editing
           mode="popup"
           [allowUpdating]="true"
@@ -57,13 +59,17 @@
           [useIcons]="true">
 
           <dxo-popup
-            title="Item Nota" [dragEnabled]="true" [showTitle]="true">
+            title="NotaItens"
+            [dragEnabled]="true"
+            [showTitle]="true"
+            [width]="700"
+            [height]="525"
+            [position]="{ my: 'top', at: 'top'}">
           </dxo-popup>
 
         </dxo-editing>
-
         <dxi-column dataField="numero"></dxi-column>
-        <dxi-column dataField="produto"></dxi-column>
+        <dxi-column dataField="nomeProduto"></dxi-column>
         <dxi-column dataField="quantidade"></dxi-column>
 
       </dx-data-grid>

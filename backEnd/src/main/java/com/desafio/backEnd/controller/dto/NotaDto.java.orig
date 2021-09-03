@@ -1,8 +1,13 @@
 package com.desafio.backEnd.controller.dto;
 
 import com.desafio.backEnd.modelo.Nota;
+<<<<<<< HEAD
+=======
+import com.desafio.backEnd.repository.ClienteRepository;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+>>>>>>> main
 
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -33,9 +38,9 @@ public class NotaDto {
 
     public NotaDto(Nota nota) {
         this.id = nota.getId();
-        this.nomeCliente = (this.nomeCliente != null) ? this.nomeCliente : nota.getCliente().getNome();
-        this.dataCompra = (this.dataCompra != null) ? this.dataCompra : nota.getDataCompra();
-        this.numero = (this.numero != null) ? this.numero : nota.getNumero();
+        this.nomeCliente = nota.getCliente().getNome();
+        this.dataCompra = nota.getDataCompra();
+        this.numero = nota.getNumero();
         this.notaItems = new ArrayList<>();
         this.notaItems.addAll(nota.getNotaItem().stream().map(NotaItemDto::new).collect(Collectors.toList()));
 
