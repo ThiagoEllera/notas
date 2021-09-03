@@ -4,9 +4,10 @@ import CustomStore from "devextreme/data/custom_store";
 import {BrowserModule} from "@angular/platform-browser";
 import {DxDataGridModule, DxDateBoxModule, DxListModule} from "devextreme-angular";
 import {ProdutoService} from "../../shared/services/produto.service";
-import {Produtos} from "../../shared/interfaces/produto.interface";
 import {NotaService} from "../../shared/services/nota.service";
-import {Notas} from "../../shared/interfaces/nota.interface";
+import {Produto} from "../../model/produto";
+import {Nota} from "../../model/nota";
+
 
 
 var URL = "http://localhost:8080/notaItem";
@@ -80,14 +81,14 @@ export class NotaItemComponent implements OnInit{
     this.popularNotas();
   }
   popularProdutos(){
-    this.produtoService.lista().subscribe((produtos: Produtos[]) =>{
+    this.produtoService.lista().subscribe((produtos: Produto[]) =>{
       this.produtos = produtos;
       console.log(produtos);
     })
   }
 
   popularNotas(){
-    this.notaService.lista().subscribe((notas: Notas[]) =>{
+    this.notaService.lista().subscribe((notas: Nota[]) =>{
       this.notas = notas;
       console.log(notas);
     })

@@ -6,7 +6,11 @@
   <dx-data-grid
     id="gridContainer"
     [dataSource]="lista"
-    [showBorders]="true">
+    keyExpr="id"
+    [showBorders]="true"
+    (onSaved)="onSaved($event)"
+
+    >
 
     <dxo-paging [enabled]="false"></dxo-paging>
     <dxo-editing
@@ -42,8 +46,8 @@
       <dxi-column dataField="numero"></dxi-column>
       <dxi-column dataField="notaItems" [visible]="false"  editCellTemplate="gridEditTemplate"></dxi-column>
 
-    <div *dxTemplate="let notaItems of 'gridEditTemplate'">
-      <dx-data-grid [dataSource]="notaItems.value" >>
+    <div *dxTemplate="let data of 'gridEditTemplate'">
+      <dx-data-grid [dataSource]="setaDataItem(data.value)" >
         <dxo-editing
           mode="popup"
           [allowUpdating]="true"

@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
 import {environment} from "../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
-import {Estado} from "../interfaces/estado.interface";
-import {Produtos} from "../interfaces/produto.interface";
-import {take} from "rxjs/operators";
+import {Produto} from "../../model/produto";
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +12,7 @@ export class ProdutoService {
   constructor(private httpClient: HttpClient) {}
 
   lista(){
-    return this.httpClient.get<Produtos[]>(this.API);
+    return this.httpClient.get<Produto[]>(this.API);
   }
 
 
