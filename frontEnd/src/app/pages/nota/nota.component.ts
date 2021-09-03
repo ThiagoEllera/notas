@@ -29,7 +29,7 @@ var URL2 = "http://localhost:8080/notaItem";
 })
 export class NotaComponent implements OnInit,AfterViewInit{
 
-  dataSource: any;
+  dataSource: Notas[] = [];
   dataSource2: any;
   clientes: any;
   produtos: any;
@@ -45,6 +45,7 @@ export class NotaComponent implements OnInit,AfterViewInit{
 
   ) {
 
+/*
     this.dataSource = new CustomStore({
       key: "id",
 
@@ -58,6 +59,7 @@ export class NotaComponent implements OnInit,AfterViewInit{
         key
       })
     });
+*/
 
   }
 

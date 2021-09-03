@@ -20,29 +20,48 @@
       <dxo-popup
         title="Nota"
         [dragEnabled]="true"
-        [showTitle]="true"
-        [width]="700"
-        [height]="525"
-        [position]="{ my: 'top', at: 'top'}">
+        [showTitle]="true">
       </dxo-popup>
+
+      <dxo-form colCount="2">
+        <dxi-item dataField="dataCompra" dataType="date" format="dd/MM/yyyy"></dxi-item>
+        <dxi-item dataField="nomeCliente">
+          <dxo-lookup
+            [dataSource]="clientes"
+            displayExpr="nome"
+            valueExpr="nome">
+          </dxo-lookup>
+        </dxi-item>
+        <dxi-item dataField="numero"></dxi-item>
+        <dxi-item itemType="empty"></dxi-item>
+        <dxi-item dataField="notaItems" [visible]="true"  editCellTemplate="gridEditTemplate" colSpan="2"></dxi-item>
+      </dxo-form>
 
     </dxo-editing>
 
 
 
       <dxi-column dataField="dataCompra" dataType="date" format="dd/MM/yyyy"></dxi-column>
-      <dxi-column dataField="nomeCliente">
-        <dxo-lookup
-          [dataSource]="clientes"
-          displayExpr="nome"
-          valueExpr="nome">
-        </dxo-lookup>
-      </dxi-column>
+      <dxi-column dataField="nomeCliente"></dxi-column>
       <dxi-column dataField="numero"></dxi-column>
       <dxi-column dataField="notaItems" [visible]="true"  editCellTemplate="gridEditTemplate"></dxi-column>
 
     <div *dxTemplate="let data of 'gridEditTemplate'">
-      <dx-data-grid [dataSource]="data">
+      <dx-data-grid [dataSource]="data.value">
+
+        <dxo-editing
+          mode="popup"
+          [allowUpdating]="true"
+          [allowAdding]="true"
+          [allowDeleting]="true"
+          [useIcons]="true">
+
+          <dxo-popup
+            title="Item Nota" [dragEnabled]="true" [showTitle]="true">
+          </dxo-popup>
+
+        </dxo-editing>
+
         <dxi-column dataField="numero"></dxi-column>
         <dxi-column dataField="produto"></dxi-column>
         <dxi-column dataField="quantidade"></dxi-column>
